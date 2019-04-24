@@ -6,6 +6,8 @@ import org.apache.kafka.streams.scala.ImplicitConversions._
 import org.apache.kafka.streams.scala._
 import org.apache.kafka.streams.scala.kstream._
 import org.apache.kafka.streams.{KafkaStreams, StreamsConfig}
+import Config.ConfigUtil._
+
 
 
   object SimpleStreamPipe extends App {
@@ -13,16 +15,16 @@ import org.apache.kafka.streams.{KafkaStreams, StreamsConfig}
 
     val props: Properties = {
       val p = new Properties()
-      p.put(StreamsConfig.APPLICATION_ID_CONFIG, "wordcount-application")
-      p.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "ds-kafka-01.c.rtp-gcp-poc.internal:9092,ds-kafka-02.c.rtp-gcp-poc.internal:9092,ds-kafka-03.c.rtp-gcp-poc.internal:9092")
+      p.put(StreamsConfig.APPLICATION_ID_CONFIG, conf.getString("App.kafka.streams.simple_pipe_stream.application_name"))
+      p.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, conf.getString("App.kafka.brokers"))
       p
     }
 
     val builder: StreamsBuilder = new StreamsBuilder
-    val textLines: KStream[String, String] = builder.stream[String, String]("topic3")
+    val textLines: KStream[String, String] = builder.stream[String, String](conf.getString("App.kafka.streams.simple_pipe_stream.input_topic"))
 
 
-    textLines.to("WordsWithCountsTopic")
+    textLines.to(conf.getString("App.kafka.streams.simple_pipe_stream.output_topic"))
 
     val streams: KafkaStreams = new KafkaStreams(builder.build(), props)
     streams.start()
