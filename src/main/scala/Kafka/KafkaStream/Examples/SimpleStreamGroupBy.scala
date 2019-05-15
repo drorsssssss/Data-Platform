@@ -15,13 +15,13 @@ object SimpleStreamGroupBy extends App {
 
   val props: Properties = {
     val p = new Properties()
-    p.put(StreamsConfig.APPLICATION_ID_CONFIG, conf.getString("App.kafka.streams.simple_groupby_stream.application_name"))
+    p.put(StreamsConfig.APPLICATION_ID_CONFIG, conf.getString("App.kafka.streams.simple-groupby-stream.application-name"))
     p.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, conf.getString("App.kafka.brokers"))
     p
   }
 
   val builder: StreamsBuilder = new StreamsBuilder
-  val textLines: KStream[String, String] = builder.stream[String, String](conf.getString("App.kafka.streams.simple_groupby_stream.input_topic"))
+  val textLines: KStream[String, String] = builder.stream[String, String](conf.getString("App.kafka.streams.simple-groupby-stream.input-topic"))
 
 
   val wordCounts: KTable[String, Long] = textLines
@@ -30,7 +30,7 @@ object SimpleStreamGroupBy extends App {
     .count() //TODO Need to understand if the counted value should be materialized
 
 
-  wordCounts.toStream.to(conf.getString("App.kafka.streams.simple_groupby_stream.output_topic"))
+  wordCounts.toStream.to(conf.getString("App.kafka.streams.simple-groupby-stream.output-topic"))
   //TODO Count value didn't persisted in the kafka message. Need to understand why
 
   val streams: KafkaStreams = new KafkaStreams(builder.build(), props)
