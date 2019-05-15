@@ -15,16 +15,16 @@ import Config.ConfigUtil._
 
     val props: Properties = {
       val p = new Properties()
-      p.put(StreamsConfig.APPLICATION_ID_CONFIG, conf.getString("App.kafka.streams.simple_pipe_stream.application_name"))
+      p.put(StreamsConfig.APPLICATION_ID_CONFIG, conf.getString("App.kafka.streams.simple-pipe-stream.application-name"))
       p.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, conf.getString("App.kafka.brokers"))
       p
     }
 
     val builder: StreamsBuilder = new StreamsBuilder
-    val textLines: KStream[String, String] = builder.stream[String, String](conf.getString("App.kafka.streams.simple_pipe_stream.input_topic"))
+    val textLines: KStream[String, String] = builder.stream[String, String](conf.getString("App.kafka.streams.simple-pipe-stream.input-topic"))
 
 
-    textLines.to(conf.getString("App.kafka.streams.simple_pipe_stream.output_topic"))
+    textLines.to(conf.getString("App.kafka.streams.simple-pipe-stream.output-topic"))
 
     val streams: KafkaStreams = new KafkaStreams(builder.build(), props)
     streams.start()
