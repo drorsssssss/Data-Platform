@@ -3,7 +3,7 @@ package Config
 import java.util.Properties
 
 import com.typesafe.config.{Config, ConfigFactory}
-import org.apache.kafka.common.serialization.StringSerializer
+import org.apache.kafka.common.serialization.{StringDeserializer, StringSerializer}
 import org.apache.spark.sql.SparkSession
 
 object ConfigUtil {
@@ -31,6 +31,20 @@ object ConfigUtil {
 
   }
 
+  def KafkaConsumerConfigs(brokerList: String): Properties = {
+    val properties = new Properties()
+    properties.put("bootstrap.servers", brokerList)
+    properties.put("key.deserializer", classOf[StringDeserializer])
+    properties.put("value.deserializer", classOf[StringDeserializer])
+    properties.put("group.id", "q1-group-1")
+    properties.put("enable.auto.commit", "false")
+    //properties.put("auto.commit.interval.ms", "1000")
+    properties.put("auto.offset.reset", "latest")
+
+    properties
+
+
+  }
 
 
 

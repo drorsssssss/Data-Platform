@@ -31,7 +31,7 @@ object EventsGeneration{
 
     val eventsGen = new EventsGeneration(topic,brokers,events)
 
-    eventsGen.Generate(10)
+    eventsGen.Generate(3)
 
   }
 }

@@ -27,7 +27,7 @@ import org.slf4j.Logger
 class KafkaSimpleProducer {
 
 
-  val producer = new KafkaProducer[String, String](KafkaProducerConfigs(conf.getString("App.kafka.brokers")))
+  private val producer = new KafkaProducer[String, String](KafkaProducerConfigs(conf.getString("App.kafka.brokers")))
 
   def produce(topic: String, messages: Iterable[String]): Unit = {
 
