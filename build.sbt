@@ -22,6 +22,13 @@ dependencyOverrides += "com.fasterxml.jackson.module" % "jackson-module-scala_2.
 
 //libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3"
 
+libraryDependencies += "com.typesafe.slick" %% "slick" % "3.3.0"
+
+libraryDependencies += "com.typesafe.slick" %% "slick-hikaricp" % "3.3.0"
+
+libraryDependencies += "mysql" % "mysql-connector-java" % "6.0.6"
+
+
 
 
 
