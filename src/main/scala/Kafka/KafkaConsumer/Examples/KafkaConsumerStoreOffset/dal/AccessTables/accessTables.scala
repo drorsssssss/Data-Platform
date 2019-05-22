@@ -26,5 +26,6 @@ class accessTables(libraryDbio: LibraryDbio) {
 
   def getOffsetByTopicPartition(topic: String,partition: Int) = Await.result(db.run(libraryDbio.getOffsetByTopicPartition(topic,partition)),Duration.Inf).head
 
+  def updateOffsets(topic: String,partition: Int, newOffset: Long) = Await.result(db.run(libraryDbio.updateOffsets(topic,partition,newOffset)),Duration.Inf)
 
 }

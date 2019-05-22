@@ -16,6 +16,11 @@ class LibraryDbio {
   def getOffsetByTopicPartition(topic: String, partition: Int) = {
     Query.offsets.filter(t => t.topic === topic && t.partition === partition).map(_.offset).result
   }
+
+  def updateOffsets(topic: String, partition: Int,newTopic :Long) = {
+    val updateStmt = for {l <- Query.offsets if l.topic === topic && l.partition === partition } yield l.offset
+    updateStmt.update(newTopic)
+  }
 }
 
 object Query {
@@ -26,5 +31,3 @@ object Query {
 
 
 }
-
-
