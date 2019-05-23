@@ -5,17 +5,13 @@ import org.apache.kafka.clients.consumer.{ConsumerRecords, KafkaConsumer}
 import Config.ConfigUtil._
 
 import scala.collection.JavaConversions._
-import slick.jdbc.MySQLProfile.api._
 import Kafka.KafkaConsumer.Examples.KafkaConsumerStoreOffset.DAL.DTO._
 import Kafka.KafkaConsumer.Examples.KafkaConsumerStoreOffset.DAL.DAO._
 import org.apache.kafka.common.TopicPartition
-
 import Kafka.KafkaConsumer.Examples.KafkaConsumerStoreOffset.DAL.AccessTables._
 
 class KafkaConsumerStoreOffset {
 
-  private val offsets = TableQuery[Offsets]
-  private val db = Database.forConfig("App.kafka.simple-consumer-store-offset.db")
   private val consumer = new KafkaConsumer[String, String](KafkaConsumerConfigs(conf.getString("App.kafka.brokers")))
   private val accessTablesFuncs = new accessTables(new LibraryDbio)
 
@@ -59,7 +55,7 @@ class KafkaConsumerStoreOffset {
       case e : Throwable =>{print(e.printStackTrace());consumer.close()}
       case _ => {print(" closingconsumer"); consumer.close()}
     }
-    finally db.close()
+    finally accessTablesFuncs.closeDB()
 
 
   }

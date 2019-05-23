@@ -28,4 +28,7 @@ class accessTables(libraryDbio: LibraryDbio) {
 
   def updateOffsets(topic: String,partition: Int, newOffset: Long) = Await.result(db.run(libraryDbio.updateOffsets(topic,partition,newOffset)),Duration.Inf)
 
+  def closeDB() = {
+    print("Close db")
+    db.close()}
 }
