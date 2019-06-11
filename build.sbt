@@ -10,7 +10,7 @@ libraryDependencies += "org.apache.kafka" %% "kafka-streams-scala" % "2.1.1"
 
 libraryDependencies += "org.apache.kafka" %% "kafka" % "2.1.1"
 
-//libraryDependencies += "org.slf4j" % "slf4j-api" % "1.7.5"
+libraryDependencies += "org.slf4j" % "slf4j-api" % "1.7.5"
 
 libraryDependencies += "org.slf4j" % "slf4j-simple" % "1.7.5"
 
