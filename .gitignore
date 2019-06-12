@@ -3,3 +3,5 @@
 project/target/
 src/test/
 target/
+/metastore_db/
+/derby.log
