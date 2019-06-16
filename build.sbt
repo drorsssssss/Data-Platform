@@ -20,6 +20,8 @@ libraryDependencies += "org.apache.spark" %% "spark-core" % "2.3.1"
 
 libraryDependencies += "org.apache.spark" %% "spark-streaming" % "2.4.3"
 
+libraryDependencies += "org.apache.spark" %% "spark-streaming-kafka-0-10" % "2.4.3"
+
 dependencyOverrides += "com.fasterxml.jackson.module" % "jackson-module-scala_2.11" % "2.9.8"
 
 //libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3"
